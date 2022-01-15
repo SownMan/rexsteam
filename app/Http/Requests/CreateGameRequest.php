@@ -36,8 +36,8 @@ class CreateGameRequest extends FormRequest
             'description' => 'required|max:500',
             'long_desc' => 'required|max:2000',
             'price' => 'required',
-            'cover' => 'required',
-            'trailer' => 'required'
+            'cover' => 'image',
+            'trailer' => 'url'
         ];
     }
 }
