@@ -17,4 +17,9 @@ class AdminController extends Controller
     public function settings(){
         return view('home.admin.settings');
     }
+    public function createGameForm(){
+        return view('craete_games', [
+            "page_title" => 'Create Game'
+        ]);
+    }
 }
