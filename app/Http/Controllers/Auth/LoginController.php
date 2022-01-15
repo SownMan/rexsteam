@@ -30,10 +30,10 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo(){
-        if(Auth()->user()->role == 1){
+        if(Auth()->user()->role == 'Admin'){
             return route('admin.home');
         }
-        elseif(Auth()->user()->role == 2){
+        elseif(Auth()->user()->role == 'User'){
             return route('user.home');
         }
     }
@@ -56,10 +56,10 @@ class LoginController extends Controller
         ]);
 
         if(auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))){
-            if(auth()->user()->role == 1){
+            if(auth()->user()->role == 'Admin'){
                 return redirect()->route('admin.home');
             }
-            elseif(auth()->user()->role == 2){
+            elseif(auth()->user()->role == 'User'){
                 return redirect()->route('user.home');
             }
         }
