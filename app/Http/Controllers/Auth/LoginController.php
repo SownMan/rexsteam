@@ -31,10 +31,10 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo(){
         if(Auth()->user()->role == 'Admin'){
-            return route('admin.home');
+            return redirect()->route('admin.home');
         }
         elseif(Auth()->user()->role == 'User'){
-            return route('user.home');
+            return redirect()->route('user.home');
         }
     }
 

@@ -23,7 +23,7 @@
 
        
         
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('check.register') }}">
                 @csrf
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Register your account</h2>
@@ -78,6 +78,9 @@
                         </select>
                     </div>
                 </div>
+                <div class="mt-4 text-center">
+                   Already have an account? <a href="{{route('login')}}">Login</a>
+                 </div><br>
 
                 <div class="row mb-0">
                     <div class="col-md-6 offset-md-4">

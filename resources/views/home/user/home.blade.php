@@ -1,25 +1,26 @@
-@extends('layouts.app')
+@extends('userlayouts.main')
 
-@section('content')
+@section('Container')
+
+<body style="background: gray">
+   
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-                <h4>Hi User :{{ Auth::user()->username }}</h4>
-                <hr>
-                Home
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+        <h1>Top Games</h1> 
+        @foreach ($games as $game)
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="{{ asset('storage/images/' . $game->cover) }}" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{$game->name}}</h5>
+                    <p class="card-text">So{{$game->description}}</p>
+                    <a href="{{ route('game.details', [$game->id]) }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>  {{($game->price)}}</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 </div>
+</body>
 @endsection

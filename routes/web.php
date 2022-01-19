@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GuestController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -17,23 +18,25 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\GuestController::class, 'guessMenu'])->name('guessMenu');
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth']], function(){
-        Route::get('/home', [AdminController::class, 'index'])->name('admin.home');
-        Route::get('/prolfe', [AdminController::class, 'index'])->name('admin.profile');
-        Route::get('/settings', [AdminController::class, 'index'])->name('admin.settings');
+        Route::get('/', [AdminController::class, 'index'])->name('admin.home');
+        Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
+        Route::get('/manage', [AdminController::class, 'manageGame'])->name('admin.manage');
+        Route::get('/add-game', [AdminController::class, 'addGameForm'])->name('admin.addform');
+        Route::post('/add-game/add', [AdminController::class, 'AddGame'])->name('games.add');
+        Route::get('/gameDetails/{id}', [AdminController::class, 'gameDetails'])->name('game.details');
 });
 
 Route::group(['prefix'=> 'user' , 'middleware' => ['isUser', 'auth']], function(){
-    Route::get('/home', [UserController::class, 'index'])->name('user.home');
-    Route::get('/profile', [UserController::class, 'index'])->name('user.profile');
-    Route::get('/settings', [UserController::class, 'index'])->name('user.settings');
+    Route::get('/', [UserController::class, 'index'])->name('user.home');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/gameDetails/{id}', [UserController::class, 'gameDetails'])->name('game.details');
+    
 });

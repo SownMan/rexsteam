@@ -9,24 +9,28 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        return view('home.admin.home');
+        $games = Games::paginate(8);
+        return view('home.admin.home', [
+            'games' => $games
+        ]);
     }
 
     public function profile(){
         return view('home.admin.profile');
     }
 
-    public function settings(){
-        return view('home.admin.settings');
-    }
+
+
     public function addGameForm(){
-        return view('addgame', [
-            "page_title" => 'Create Game'
-        ]);
+        return view('home.admin.addgame');
     }
 
     public function addGame(CreateGameRequest $request){
-        $validated = $request->validate();
+        
+        $validated = $request->validated();
+        $name = $request->file('cover')->getClientOriginalName();
+        $request->file('cover')->storeAs('public/images/', $name);
+
         $games = new Games;
         $games->name = $validated["name"];
         $games->category = $validated["category"];
@@ -37,13 +41,23 @@ class AdminController extends Controller
         $games->long_desc = $validated["long_desc"];
         $games->price = $validated["price"];
         $games->trailer = $validated["trailer"];
-        
-        if ($request->file('photo')) {
-            $games->cover = $request->file('cover')->store('photos');
-        }
-       
+        $games->cover = $name;
 
+        
+        
         $games->save();
         return redirect()->route('admin.home');
+    }
+
+    public function manageGame(){
+        return view('home.admin.manage_game');
+    }
+
+    public function gameDetails($id)
+    {
+        $games= Games::findorFail($id);
+        return view('home.admin.gamedetail', [
+            'games' => $games
+        ]);
     }
 }

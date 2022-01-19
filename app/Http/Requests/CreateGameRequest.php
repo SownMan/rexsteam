@@ -14,7 +14,7 @@ class CreateGameRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class CreateGameRequest extends FormRequest
             'long_desc' => 'required|max:2000',
             'price' => 'required',
             'cover' => 'image',
-            'trailer' => 'url'
+            'trailer' => 'required'
         ];
     }
 }

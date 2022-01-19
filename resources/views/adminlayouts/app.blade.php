@@ -25,9 +25,11 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="">
-                    <a class="navbar-brand" href="/user"><i class="fa fa-gamepad"></i> ReXSteam</a>
+                    <a class="navbar-brand" href="/admin/"><i class="fa fa-gamepad"></i> ReXSteam</a>
                 </a>
-                
+                <a class="navbar-brand" href="">
+                    <a class="navbar-brand" href="{{ route('admin.manage') }}"><i class=""></i> Manage Game</a>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

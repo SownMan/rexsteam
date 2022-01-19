@@ -22,7 +22,7 @@
       
 
        
-        <form class="card card-md" method="post" action="{{ route('login') }}"  autocomplete="off">
+        <form class="card card-md" method="post" action="{{ route('checkLogin') }}"  autocomplete="off">
             @csrf
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Login to your account</h2>
